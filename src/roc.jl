@@ -1,6 +1,6 @@
 using Statistics
 
-export roc, auc, auc_roc, confusion_matrix
+export roc, auc, auc_roc, confusion_matrix, confusion_matrix_nt
 
 """
 	roc(pred_scores, real_scores)
@@ -54,4 +54,17 @@ function confusion_matrix(pred_scores::AbstractVector, real_scores::AbstractVect
 	fp = sum((pred_scores .> thresh) .& (real_scores .≤ 0))
 	[tp fp;
 	 fn tn]
+end
+
+"""
+	confusion_matrix_nt(pred_scores, real_scores, thresh=0)
+
+Returns a NamedTuple, `(tp, fn, tn, fp)`.
+"""
+function confusion_matrix_nt(pred_scores::AbstractVector, real_scores::AbstractVector; thresh=0)
+	tp = sum((pred_scores .> thresh) .& (real_scores .> 0))
+	fn = sum((pred_scores .≤ thresh) .& (real_scores .> 0))
+	tn = sum((pred_scores .≤ thresh) .& (real_scores .≤ 0))
+	fp = sum((pred_scores .> thresh) .& (real_scores .≤ 0))
+    return (tp = tp, fn = fn, tn = tn, fp = fp)
 end

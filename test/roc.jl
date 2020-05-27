@@ -23,3 +23,8 @@ pred_scores = real_scores
 
 pred_scores = -real_scores
 @test auc(pred_scores, real_scores) ≈ 0
+
+M  = confusion_matrix(pred_scores, real_scores)
+nt = confusion_matrix_nt(pred_scores, real_scores)
+@test M == [nt.tp nt.fp;
+            nt.fn nt.tn]
