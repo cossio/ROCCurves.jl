@@ -6,8 +6,8 @@ export roc, auc, auc_roc, confusion_matrix, confusion_matrix_nt
 	roc(pred_scores, real_scores)
 
 Returns a tuple of vectors (FPR, TPR), where FPR = "False positive rate" and
-TPR = "True positive rate". A classification is positive or negative
-according to the sign of the score.
+TPR = "True positive rate".
+Each score in `real_scores` is interpreted as positive if the score is positive.
 To plot the ROC curve using Plots.jl: `plot(FPR, TPR, linetype=:steppost)`.
 """
 function roc(pred_scores::AbstractVector, real_scores::AbstractVector)
