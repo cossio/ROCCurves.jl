@@ -1,7 +1,7 @@
 name = "ROCCurves"
 uuid = "90902b46-5383-4c97-8f8a-bddf608a7bc6"
 authors = ["Jorge Fernandez-de-Cossio-Diaz <j.cossio.diaz@gmail.com>"]
-version = "1.0.0"
+version = "1.0.1-DEV"
 
 [deps]
 Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
