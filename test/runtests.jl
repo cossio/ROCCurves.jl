@@ -1,3 +1,2 @@
-using SafeTestsets
-
-@safetestset "roc" begin include("roc.jl") end
+module aqua_tests include("aqua.jl") end
+module roc_tests include("roc.jl") end
