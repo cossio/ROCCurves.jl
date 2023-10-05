@@ -14,9 +14,15 @@ function roc(pred_scores::AbstractVector, real_scores::AbstractVector)
 	@assert length(pred_scores) == length(real_scores)
 	perm = sortperm(pred_scores; rev=true)
 	real = real_scores[perm]
+    pred = pred_scores[perm]
+
 	tpr = [0; cumsum(real .> 0)] ./ sum(real .> 0)
 	fpr = [0; cumsum(real .≤ 0)] ./ sum(real .≤ 0)
-	return (fpr, tpr)
+
+    # remove extra points
+    _jumps = [true; pred[2:end] .≠ pred[1:end-1]; true]
+
+    return (fpr[_jumps], tpr[_jumps])
 end
 
 """
